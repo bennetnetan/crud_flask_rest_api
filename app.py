@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import sqlite3
 
 app = Flask(__name__)
@@ -60,6 +60,10 @@ def delete_task(task_id):
             return jsonify({'error': 'Task not found'}), 404
         conn.commit()
     return jsonify({'message': 'Task deleted'})
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 if __name__ == "__main__":
     init_db()
